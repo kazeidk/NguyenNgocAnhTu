@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SportsBookingSystem-impl" default="default" basedir=".." xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc">
+    
+    <target name="default" depends="build"/>
+    
+    <target name="init">
+        <property name="build.dir" location="build"/>
+        <property name="build.classes.dir" location="${build.dir}/classes"/>
+        <property name="dist.dir" location="dist"/>
+        <property name="dist.jar" location="${dist.dir}/SportsBookingSystem.jar"/>
+        <property name="src.dir" location="src"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+    
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" 
+               destdir="${build.classes.dir}"
+               source="1.8"
+               target="1.8"
+               encoding="UTF-8"
+               includeantruntime="false">
+        </javac>
+    </target>
+    
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.jar}" basedir="${build.classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="build" depends="jar"/>
+    
+    <target name="run" depends="jar">
+        <java jar="${dist.jar}" fork="true"/>
+    </target>
+    
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="bin"/>
+    </target>
+    
+</project>
