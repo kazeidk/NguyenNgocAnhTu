@@ -11,7 +11,7 @@
   
   // ========= Constants (Updated) ========= //
   const PURCHASE_DATE = "2025-07-18T00:00:00Z";       // ✅ Current date
-  const EXPIRES_DATE = "2099-12-31T23:59:59Z";        // ✅ Lifetime
+  const EXPIRES_DATE = "2099-07-18T23:59:59Z";        // ✅ Lifetime
   const PRODUCT_ID = "locket.premium.yearly";         // ✅ Stable product ID
   
   // ========= Mapping Configuration ========= //
