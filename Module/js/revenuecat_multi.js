@@ -9,8 +9,8 @@
   'use strict';
   
   // ========= Constants ========= //
-  const PURCHASE_DATE = "2025-11-01T00:00:00Z";
-  const EXPIRES_DATE = "2099-12-31T23:59:59Z";
+  const PURCHASE_DATE = "2025-07-18T00:00:00Z";
+  const EXPIRES_DATE = "2099-07-18T23:59:59Z";
   
   // ========= App Configurations ========= //
   const APP_CONFIGS = {
