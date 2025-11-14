@@ -1,0 +1,75 @@
+#!name=💰 Anh Tú Premium - LanceX
+#!desc=17 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Truecaller + Wink + Alight Motion + Documents + Vivacut + KineMaster + Photomath + Lightroom + Djay + Calm | 💰 $1.99 | 📦 5.7KB | ⭐⭐⭐⭐⭐ Giá rẻ nhất
+#!author=Nguyễn Ngọc Anh Tú
+#!homepage=https://github.com/z3rokaze/NguyenNgocAnhTu
+#!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/90/81/cb/9081cbba-b7c4-63b5-1207-23ab9efbbe04/AppIcon-0-1x_U007emarketing-0-11-0-0-85-220-0.png/230x0w.webp
+#!system=ios
+
+[General]
+bypass-system = true
+skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local
+dns-server = system
+ipv6 = false
+force-http-engine-hosts = %APPEND% *youtube.com:443, *googlevideo.com:443
+
+[Rule]
+AND,((DOMAIN-SUFFIX,googlevideo.com), (PROTOCOL,UDP)),REJECT-NO-DROP
+AND,((DOMAIN,youtubei.googleapis.com), (PROTOCOL,UDP)),REJECT-NO-DROP
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googleadservices.com,REJECT
+
+[Script]
+youtube-request = type=http-request,pattern=^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch))(\?(.*))?$,requires-body=1,max-size=3145728,binary-body-mode=1,timeout=20,engine=jsc,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js
+
+youtube-response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch))(\?(.*))?$,requires-body=1,max-size=3145728,binary-body-mode=1,timeout=20,engine=jsc,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,argument="{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}"
+
+spotify-json = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,timeout=15,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
+
+spotify-proto = type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,timeout=25,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js,script-update-interval=0
+
+revenuecat-multi-response = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/revenuecat_multi.js,requires-body=true,max-size=262144,timeout=10,engine=jsc
+
+revenuecat-multi-header = type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js,timeout=3,engine=jsc
+
+soundcloud-response = type=http-response,pattern=^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios,requires-body=1,max-size=262144,timeout=15,engine=jsc,script-path=https://raw.githubusercontent.com/Marol62926/MarScrpt/main/soundcloud.js
+
+picsart-response = type=http-request,pattern=^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$,script-path=https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/PicsArt.js,requires-body=true,timeout=10,engine=jsc
+
+truecaller-response = type=http-response,pattern=^https:\/\/premium-(.+)\.truecaller\.com\/v\d\/(subscriptions|products\/apple),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/truecaller.js,timeout=10,engine=jsc
+
+wink-response = type=http-response,pattern=^https?:\/\/api-sub\.meitu\.com\/v2\/user\/vip_info_by_group\.json,requires-body=1,script-path=https://raw.githubusercontent.com/quocchienn/co_tien_khong/refs/heads/Module/WinkVipCrack.js,timeout=10,engine=jsc
+
+alightmotion-response = type=http-response,pattern=^https:\/\/us-central1-alight-creative\.cloudfunctions\.net\/getAccountStatusAndLicenses$,script-path=https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/AlightMotion.js,requires-body=true,timeout=10,engine=jsc
+
+documents-request = type=http-request,pattern=^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/documents\/subscription\/refresh,requires-body=1,script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/documents.js,timeout=10,engine=jsc
+
+vivacut-response = type=http-response,pattern=^https:\/\/medi\.dxzzy321\.top\/api\/rest\/commerce\/integrate\/vip\/perform$,requires-body=1,script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/vivacut.js,timeout=10,engine=jsc
+
+kinemaster-response = type=http-response,pattern=^https:\/\/api-account\.kinemasters\.com\/v2\/user\/subscribe,script-path=https://raw.githubusercontent.com/iSteal-it/script/refs/heads/main/Kinemaster.json,requires-body=true,max-size=131072,timeout=10,engine=jsc
+
+photomath-response = type=http-response,pattern=^https:\/\/lapi\.photomath\.net\/v4\/me,script-path=https://raw.githubusercontent.com/iSteal-it/script/main/Photomath.json,requires-body=true,max-size=131072,timeout=10,engine=jsc
+
+lightroom-response = type=http-response,pattern=^https:\/\/photos\.adobe\.io\/v2\/accounts,script-path=https://raw.githubusercontent.com/litieyin/AD_VIP/main/Script/lightroom.js,requires-body=1,timeout=10,engine=jsc
+
+djay-response = type=http-response,pattern=^https:\/\/app\.algoriddim\.com\/api\/v1\/validate-receipt,script-path=https://raw.githubusercontent.com/iSteal-it/script/main/djay.json,requires-body=true,max-size=131072,timeout=10,engine=jsc
+
+calm-response = type=http-response,pattern=^https:\/\/api\.calm\.com\/me$,script-path=https://raw.githubusercontent.com/iSteal-it/script/main/calm.json,requires-body=true,timeout=10,engine=jsc
+
+[Url Rewrite]
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad reject-200
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads reject-200
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) reject-200
+^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext reject-200
+(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
+
+[Map Local]
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad data-type=text data="" status-code=200
+
+[Header Rewrite]
+^https?://api.revenuecat.com/.+/(receipts$|subscribers/?(.*?)*$) header-del x-revenuecat-etag
+^https?://api.revenuecat.com/.+/(receipts$|subscribers/?(.*?)*$) header-del X-RevenueCat-ETag
+^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(user-customization-service\/v1\/customize|bootstrap\/v1\/bootstrap)$ header-del if-none-match
+
+[MITM]
+hostname = %APPEND% -redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com, spclient.wg.spotify.com, *.spclient.spotify.com, api.revenuecat.com, api-mobile.soundcloud.com, api.picsart.com, premium*.truecaller.com, api-sub.meitu.com, us-central1-alight-creative.cloudfunctions.net, license.pdfexpert.com, medi.dxzzy321.top, api-account.kinemasters.com, lapi.photomath.net, photos.adobe.io, app.algoriddim.com, api.calm.com
+enable = true
