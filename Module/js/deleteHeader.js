@@ -1,7 +1,9 @@
 // ========================================
-// RevenueCat ETag Header Remover - Optimized
+// RevenueCat ETag Header Remover - Enhanced
 // ⚡ Performance: Ultra Fast
-// 🔐 Remove caching headers for Locket
+// 🔐 Remove caching headers for RevenueCat apps
+// 📅 Version: 1.1 (2025-11-15)
+// 👤 Author: z3rokaze
 // ========================================
 
 (function() {
@@ -10,9 +12,14 @@
   // Get request headers (Direct reference - fastest)
   const headers = $request.headers;
   
-  // Remove ETag headers (Both cases - optimized)
+  // Remove ETag headers (All possible cases)
   delete headers["X-RevenueCat-ETag"];
   delete headers["x-revenuecat-etag"];
+  delete headers["X-REVENUECAT-ETAG"];
+  
+  // Also remove If-None-Match (additional caching header)
+  delete headers["If-None-Match"];
+  delete headers["if-none-match"];
   
   // Return modified headers (Fastest return)
   $done({ headers: headers });
