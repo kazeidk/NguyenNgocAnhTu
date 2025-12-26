@@ -1,7 +1,7 @@
 #!name=⚡ Nguyễn Ngọc Anh Tú 🌸 - Premium Extended
 #!desc=✨ 17 Apps Premium Unlocker: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Truecaller + Wink + Alight Motion + Documents + Vivacut + KineMaster + Photomath + Lightroom + Djay + Calm 🔥 | Ultra Optimized | 100% Safe | Lifetime Access
-#!version=2.3.2
-#!date=2025-12-01
+#!version=2.3.3
+#!date=2025-12-27
 #!author=Nguyễn Ngọc Anh Tú (z3rokaze)
 #!tag=📩 [Messenger](https://www.messenger.com/channel/NguyenNgocAnhTu.VN)
 #!homepage=🌐 [GitHub](https://github.com/z3rokaze/NguyenNgocAnhTu)
@@ -40,7 +40,7 @@ DOMAIN-SUFFIX,googleadservices.com,REJECT
 # 📺 YouTube Premium (Latest Version)
 # ========================================
 # 👤 Author: Maasea
-# 📅 Version: Latest (Auto-update from master) - Updated 2025-12-01
+# 📅 Version: Latest (Auto-update from master) - Updated 2025-12-27
 # 🎯 Features: Ad blocking, PiP, Background play, Lyrics translation
 # ⚡ Performance: Binary mode, 3MB buffer, 20s timeout
 # 🌍 Language: Vietnamese (vi) - Change in argument if needed
@@ -54,21 +54,23 @@ youtube-response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.c
 # 🎵 Spotify Premium (Latest Version)
 # ========================================
 # 👤 Author: app2smile
-# 📅 Version: Latest (Auto-update from master) - Updated 2025-12-01
+# 📅 Version: Latest (2025-08-31) - Updated 2025-12-27
 # 🎯 Features: No ads, Unlimited skips, High quality audio, Lyrics
-# ⚡ Performance: Binary proto, No cache, Fast JSON processing
+# ⚡ Performance: Binary proto, Header modification, Fast JSON
 # 🔄 Update: Auto-refresh disabled for stability, Always latest
 # ========================================
-spotify-json = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|[\w-]+-spclient\.spotify\.com)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,timeout=15,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
+spotify-header = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(user-customization-service\/v1\/customize)$,requires-body=0,timeout=10,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-qx-header.js
 
-spotify-proto = type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|[\w-]+-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,timeout=25,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js,script-update-interval=0
+spotify-proto = type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,timeout=10,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js,script-update-interval=0
+
+spotify-json = type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,timeout=10,engine=jsc,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
 
 # ========================================
 # 🔐 Locket Gold + VSCO Premium (Multi-App)
 # ========================================
 # 👤 Author: z3rokaze (Universal Script)
-# 📅 Version: 1.2 (2025-12-01)
-# 🎯 Lifetime: 2025-12-01 → 2099-12-31 (74+ years!)
+# 📅 Version: 1.3 (2025-12-27)
+# 🎯 Lifetime: 2025-12-27 → 2099-12-31 (74+ years!)
 # 🎨 Apps: Locket Gold & VSCO Premium
 # ⚡ Smart User-Agent detection (Auto-detect app)
 # 🚀 Performance: IIFE pattern, 256KB buffer, 10s/3s timeout
@@ -243,7 +245,7 @@ calm-response = type=http-response,pattern=^https:\/\/api\.calm\.com\/me$,script
 ^https?://api.revenuecat.com/.+/(receipts$|subscribers/?(.*?)*$) header-del X-RevenueCat-ETag
 
 # Spotify - Fix caching issue (from Hasukatsu)
-^https:\/\/(spclient\.wg\.spotify\.com|[\w-]+-spclient\.spotify\.com)\/(user-customization-service\/v1\/customize|bootstrap\/v1\/bootstrap)$ header-del if-none-match
+^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(user-customization-service\/v1\/customize|bootstrap\/v1\/bootstrap)$ header-del if-none-match
 
 ################################
 #          [ MITM ]            #

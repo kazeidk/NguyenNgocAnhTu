@@ -51,16 +51,21 @@ http:
       max-size: 3145728
       binary-mode: true
       argument: '{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}'
-    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(user-customization-service\/v1\/customize)$
+      name: sp-header
+      type: request
+      require-body: false
+      timeout: 10
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/
       name: sp-json
       type: request
       require-body: false
-      timeout: 15
-    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
+      timeout: 10
+    - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$
       name: sp-proto
       type: response
       require-body: true
-      timeout: 25
+      timeout: 10
       max-size: 0
       binary-mode: true
     - match: ^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$)
@@ -153,6 +158,9 @@ script-providers:
     interval: 86400
   yt-res:
     url: https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js
+    interval: 86400
+  sp-header:
+    url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-qx-header.js
     interval: 86400
   sp-json:
     url: https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
