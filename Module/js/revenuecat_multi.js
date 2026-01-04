@@ -1,8 +1,8 @@
 // ========================================
 // RevenueCat Multi-App Premium Unlocker
 // ⚡ Performance: Ultra-Fast & Universal
-// 🔐 Supports: Locket Gold + VSCO Premium
-// 📅 Version: 1.3 (2025-12-27) - Enhanced
+// 🔐 Supports: Locket + VSCO + Mojo + HTTPBot + 1Blocker
+// 📅 Version: 1.4 (2025-01-04) - Integrated
 // 👤 Author: z3rokaze
 // ========================================
 
@@ -10,8 +10,8 @@
   'use strict';
 
   // ========= Constants (Updated) ========= //
-  const PURCHASE_DATE = "2025-12-27T00:00:00Z";  // ✅ Current date
-  const EXPIRES_DATE = "2099-12-31T23:59:59Z";   // ✅ Lifetime
+  const PURCHASE_DATE = "2025-01-04T00:00:00Z";
+  const EXPIRES_DATE = "2099-12-31T23:59:59Z";
 
   // ========= App Configurations ========= //
   const APP_CONFIGS = {
@@ -22,6 +22,18 @@
     'VSCO': {
       entitlements: ['membership'],
       products: ['VSCOANNUAL', 'VSCOCAM02BUALL', 'VSCOCAM02BULE0001', 'VSCOCAM02BUXXCC01']
+    },
+    'Mojo': {
+      entitlement: 'pro',
+      productId: 'revenuecat.pro.yearly'
+    },
+    'HTTPBot': {
+      entitlement: 'rc_lifetime',
+      productId: 'com.behindtechlines.HTTPBot.prounlock'
+    },
+    '1Blocker': {
+      entitlement: 'premium',
+      productId: 'blocker.ios.subscription.yearly'
     }
   };
 
@@ -80,14 +92,12 @@
   let appDetected = false;
 
   if (ua.includes('Locket')) {
-    // Locket Gold
     const config = APP_CONFIGS['Locket'];
     responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
     responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
     appDetected = true;
   }
   else if (ua.includes('VSCO')) {
-    // VSCO Premium
     const config = APP_CONFIGS['VSCO'];
     config.products.forEach(productId => {
       responseObj.subscriber.subscriptions[productId] = createSubscription(productId);
@@ -95,6 +105,24 @@
     config.entitlements.forEach(entKey => {
       responseObj.subscriber.entitlements[entKey] = createEntitlement(config.products[0]);
     });
+    appDetected = true;
+  }
+  else if (ua.includes('Mojo') || ua.includes('mojo')) {
+    const config = APP_CONFIGS['Mojo'];
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
+    appDetected = true;
+  }
+  else if (ua.includes('HTTPBot')) {
+    const config = APP_CONFIGS['HTTPBot'];
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
+    appDetected = true;
+  }
+  else if (ua.includes('1Blocker') || ua.includes('blocker')) {
+    const config = APP_CONFIGS['1Blocker'];
+    responseObj.subscriber.subscriptions[config.productId] = createSubscription(config.productId);
+    responseObj.subscriber.entitlements[config.entitlement] = createEntitlement(config.productId);
     appDetected = true;
   }
 

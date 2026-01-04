@@ -1,5 +1,5 @@
 name: ⚡ Anh Tú Premium - Stash
-desc: 17 Apps - Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Truecaller + Wink + Alight Motion + Documents + Vivacut + KineMaster + Photomath + Lightroom + Djay + Calm | 💰 $5.99 | 📦 3.6KB | ⭐⭐⭐⭐ Tiết kiệm
+desc: 16 Apps - Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot | Original Sources
 author: Nguyễn Ngọc Anh Tú
 homepage: https://github.com/z3rokaze/NguyenNgocAnhTu
 icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
@@ -17,18 +17,15 @@ http:
     - "spclient.wg.spotify.com"
     - "*-spclient.spotify.com"
     - "api.revenuecat.com"
-    - "api-mobile.soundcloud.com"
     - "api.picsart.com"
-    - "premium*.truecaller.com"
-    - "api-sub.meitu.com"
+    - "api-mobile.soundcloud.com"
     - "us-central1-alight-creative.cloudfunctions.net"
-    - "license.pdfexpert.com"
-    - "medi.dxzzy321.top"
     - "api-account.kinemasters.com"
     - "lapi.photomath.net"
     - "photos.adobe.io"
     - "app.algoriddim.com"
     - "api.calm.com"
+    - "api.busuu.com"
   url-rewrite:
     - ^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad - reject-200
     - ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject-200
@@ -36,6 +33,7 @@ http:
     - ^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext - reject-200
     - (^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
   script:
+    # YouTube - Maasea (ORIGINAL)
     - match: ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch)
       name: yt-req
       type: request
@@ -51,6 +49,7 @@ http:
       max-size: 3145728
       binary-mode: true
       argument: '{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}'
+    # Spotify - app2smile (ORIGINAL)
     - match: ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(user-customization-service\/v1\/customize)$
       name: sp-header
       type: request
@@ -68,6 +67,7 @@ http:
       timeout: 10
       max-size: 0
       binary-mode: true
+    # RevenueCat Multi - z3rokaze
     - match: ^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$)
       name: rc-multi-res
       type: response
@@ -79,74 +79,65 @@ http:
       type: request
       require-body: false
       timeout: 5
-    - match: ^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios
-      name: sc-res
-      type: response
-      require-body: true
-      timeout: 15
-      max-size: 262144
+    # PicsArt - NobyDa (ORIGINAL)
     - match: ^https:\/\/api\.picsart\.com\/gw-v2\/shop\/subscription\/apple\/purchases$
       name: pa-req
       type: request
       require-body: true
       timeout: 10
       max-size: 131072
-    - match: ^https:\/\/premium-(.+)\.truecaller\.com\/v\d\/(subscriptions|products\/apple)
-      name: tc-res
+    # SoundCloud Go+ - sbunkov (Updated 2025-12-23)
+    - match: ^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios
+      name: sc-res
       type: response
       require-body: true
-      timeout: 10
-      max-size: 0
-    - match: ^https?:\/\/api-sub\.meitu\.com\/v2\/user\/vip_info_by_group\.json
-      name: wk-res
-      type: response
-      require-body: true
-      timeout: 10
+      timeout: 15
       max-size: 262144
+    # Alight Motion - iSteal-it
     - match: ^https:\/\/us-central1-alight-creative\.cloudfunctions\.net\/getAccountStatusAndLicenses$
       name: am-res
       type: response
       require-body: true
       timeout: 10
       max-size: 262144
-    - match: ^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/documents\/subscription\/refresh
-      name: doc-req
-      type: request
-      require-body: true
-      timeout: 10
-      max-size: 131072
-    - match: ^https:\/\/medi\.dxzzy321\.top\/api\/rest\/commerce\/integrate\/vip\/perform$
-      name: vc-res
-      type: response
-      require-body: true
-      timeout: 10
-      max-size: 131072
+    # KineMaster - iSteal-it
     - match: ^https:\/\/api-account\.kinemasters\.com\/v2\/user\/subscribe
       name: km-res
       type: response
       require-body: true
       timeout: 10
       max-size: 131072
+    # Photomath - iSteal-it
     - match: ^https:\/\/lapi\.photomath\.net\/v4\/me
       name: pm-res
       type: response
       require-body: true
       timeout: 10
       max-size: 131072
+    # Lightroom - iSteal-it
     - match: ^https:\/\/photos\.adobe\.io\/v2\/accounts
       name: lr-res
       type: response
       require-body: true
       timeout: 10
       max-size: 131072
+    # Djay - iSteal-it
     - match: ^https:\/\/app\.algoriddim\.com\/api\/v1\/validate-receipt
       name: dj-res
       type: response
       require-body: true
       timeout: 10
       max-size: 131072
+    # Calm - iSteal-it
     - match: ^https:\/\/api\.calm\.com\/me$
       name: calm-res
+      type: response
+      require-body: true
+      timeout: 10
+      max-size: 131072
+    # Bussu - iSteal-it
+    - match: ^https:\/\/api\.busuu\.com\/users\/me
+      name: bussu-res
       type: response
       require-body: true
       timeout: 10
@@ -174,39 +165,30 @@ script-providers:
   rc-multi-hdr:
     url: https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js
     interval: 86400
-  sc-res:
-    url: https://raw.githubusercontent.com/Marol62926/MarScrpt/main/soundcloud.js
-    interval: 86400
   pa-req:
-    url: https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/PicsArt.js
+    url: https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js
     interval: 86400
-  tc-res:
-    url: https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/truecaller.js
-    interval: 86400
-  wk-res:
-    url: https://raw.githubusercontent.com/quocchienn/co_tien_khong/refs/heads/Module/WinkVipCrack.js
+  sc-res:
+    url: https://raw.githubusercontent.com/sbunkov/shadowrocket-configuration/main/scripts/soundcloud.js
     interval: 86400
   am-res:
-    url: https://raw.githubusercontent.com/quocchienn/Make/refs/heads/crack/AlightMotion.js
-    interval: 86400
-  doc-req:
-    url: https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/documents.js
-    interval: 86400
-  vc-res:
-    url: https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/vivacut.js
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/alight-motion.json
     interval: 86400
   km-res:
-    url: https://raw.githubusercontent.com/iSteal-it/script/refs/heads/main/Kinemaster.json
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/Kinemaster.json
     interval: 86400
   pm-res:
     url: https://raw.githubusercontent.com/iSteal-it/script/main/Photomath.json
     interval: 86400
   lr-res:
-    url: https://raw.githubusercontent.com/litieyin/AD_VIP/main/Script/lightroom.js
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/Lightroom.json
     interval: 86400
   dj-res:
     url: https://raw.githubusercontent.com/iSteal-it/script/main/djay.json
     interval: 86400
   calm-res:
     url: https://raw.githubusercontent.com/iSteal-it/script/main/calm.json
+    interval: 86400
+  bussu-res:
+    url: https://raw.githubusercontent.com/iSteal-it/script/main/bussu.json
     interval: 86400
