@@ -1,5 +1,5 @@
 #!name=⚡ Anh Tú Premium - Surge
-#!desc=16 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot | Original Sources
+#!desc=19 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot + Structured + Splice + Facetune | Original Sources
 #!author=Nguyễn Ngọc Anh Tú
 #!homepage=https://github.com/z3rokaze/NguyenNgocAnhTu
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
@@ -26,21 +26,21 @@ AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 [Script]
 # YouTube - Maasea (ORIGINAL)
 yt-req=type=http-request,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch),requires-body=1,max-size=3145728,binary-body-mode=1,timeout=20,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js
-yt-res=type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch),requires-body=1,max-size=3145728,binary-body-mode=1,timeout=20,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,argument="{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}"
+yt-res=type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch),requires-body=1,max-size=3145728,binary-body-mode=1,timeout=20,script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,argument={"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}
 
 # Spotify - app2smile (ORIGINAL)
 sp-header=type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(user-customization-service\/v1\/customize)$,requires-body=0,timeout=10,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-qx-header.js
 sp-json=type=http-request,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,timeout=10,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
 sp-proto=type=http-response,pattern=^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,timeout=10,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
 
-# RevenueCat Multi - z3rokaze (Locket+VSCO+Mojo+HTTPBot+1Blocker)
+# RevenueCat Multi - z3rokaze (Locket+VSCO+Mojo+HTTPBot+1Blocker+Structured+Splice+Facetune)
 rc-res=type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/revenuecat_multi.js,requires-body=true,max-size=262144,timeout=15
 rc-hdr=type=http-request,pattern=^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers),script-path=https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js,timeout=5
 
 # PicsArt - NobyDa (ORIGINAL)
 pa-res=type=http-response,pattern=^https:\/\/api\.(picsart|meiease)\.c(n|om)\/shop\/subscription\/(validate|apple\/purchases),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js,requires-body=true,max-size=131072,timeout=10
 
-# SoundCloud Go+ - sbunkov (Updated 2025-12-23)
+# SoundCloud Go+ - sbunkov (Updated 2026-01-13)
 sc-res=type=http-response,pattern=^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios,requires-body=1,max-size=262144,timeout=15,script-path=https://raw.githubusercontent.com/sbunkov/shadowrocket-configuration/main/scripts/soundcloud.js
 
 # Alight Motion - iSteal-it

@@ -1,5 +1,5 @@
 # ⚡ Anh Tú Premium - Quantumult X
-# 16 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot | Original Sources
+# 19 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot + Structured + Splice + Facetune | Original Sources
 # https://github.com/z3rokaze/NguyenNgocAnhTu
 
 hostname=*.googlevideo.com,www.youtube.com,s.youtube.com,youtubei.googleapis.com,spclient.wg.spotify.com,*-spclient.spotify.com,api.revenuecat.com,api.picsart.c*,api.meiease.c*,api-mobile.soundcloud.com,us-central1-alight-creative.cloudfunctions.net,api-account.kinemasters.com,lapi.photomath.net,photos.adobe.io,app.algoriddim.com,api.calm.com,api.busuu.com
@@ -32,14 +32,14 @@ host-keyword, spotify-ads, reject
 ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/ url script-request-header https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
 ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$ url script-response-body https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js
 
-# RevenueCat Multi - z3rokaze (Locket+VSCO+Mojo+HTTPBot+1Blocker)
+# RevenueCat Multi - z3rokaze (Locket+VSCO+Mojo+HTTPBot+1Blocker+Structured+Splice+Facetune)
 ^https:\/\/api\.revenuecat\.com\/.*\/(receipts$|subscribers\/[^/]+$) url script-response-body https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/revenuecat_multi.js
 ^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers) url script-request-header https://raw.githubusercontent.com/z3rokaze/NguyenNgocAnhTu/main/Module/js/deleteHeader.js
 
 # PicsArt - NobyDa (ORIGINAL)
 ^https:\/\/api\.(picsart|meiease)\.c(n|om)\/shop\/subscription\/(validate|apple\/purchases) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js
 
-# SoundCloud Go+ - sbunkov (Updated 2025-12-23)
+# SoundCloud Go+ - sbunkov (Updated 2026-01-13)
 ^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios url script-response-body https://raw.githubusercontent.com/sbunkov/shadowrocket-configuration/main/scripts/soundcloud.js
 
 # Alight Motion - iSteal-it

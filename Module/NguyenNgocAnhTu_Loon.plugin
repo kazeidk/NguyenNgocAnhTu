@@ -1,5 +1,5 @@
 #!name=⚡ Anh Tú Premium - Loon
-#!desc=16 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot | Original Sources
+#!desc=19 Apps: Locket + VSCO + YouTube + Spotify + SoundCloud + PicsArt + Alight Motion + KineMaster + Photomath + Lightroom + Djay + Calm + Mojo + Bussu + 1Blocker + HTTPBot + Structured + Splice + Facetune | Original Sources
 #!author=Nguyễn Ngọc Anh Tú
 #!homepage=https://github.com/z3rokaze/NguyenNgocAnhTu
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
@@ -30,7 +30,7 @@ AND,((DOMAIN,youtubei.googleapis.com),(PROTOCOL,UDP)),REJECT
 [Script]
 # YouTube - Maasea (ORIGINAL)
 http-request ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|reel\/reel_watch_sequence|get_watch) script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,requires-body=true,binary-body-mode=true,timeout=20,tag=YT-Req
-http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,requires-body=true,binary-body-mode=true,timeout=20,argument="{"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false}",tag=YT-Res
+http-response ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch) script-path=https://raw.githubusercontent.com/Maasea/sgmodule/master/Script/Youtube/youtube.response.js,requires-body=true,binary-body-mode=true,timeout=20,argument={"lyricLang":"vi","captionLang":"vi","blockUpload":true,"blockImmersive":true,"debug":false},tag=YT-Res
 
 # Spotify - app2smile (ORIGINAL)
 http-request ^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(user-customization-service\/v1\/customize)$ script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-qx-header.js,timeout=10,tag=SP-Hdr
@@ -44,7 +44,7 @@ http-request ^https:\/\/api\.revenuecat\.com\/.*\/(receipts|subscribers) script-
 # PicsArt - NobyDa (ORIGINAL)
 http-response ^https:\/\/api\.(picsart|meiease)\.c(n|om)\/shop\/subscription\/(validate|apple\/purchases) script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js,requires-body=true,timeout=10,tag=PA-Res
 
-# SoundCloud Go+ - sbunkov (Updated 2025-12-23)
+# SoundCloud Go+ - sbunkov (Updated 2026-01-13)
 http-response ^https:\/\/api-mobile\.soundcloud\.com\/configuration\/ios script-path=https://raw.githubusercontent.com/sbunkov/shadowrocket-configuration/main/scripts/soundcloud.js,requires-body=true,timeout=15,tag=SC-Res
 
 # Alight Motion - iSteal-it
